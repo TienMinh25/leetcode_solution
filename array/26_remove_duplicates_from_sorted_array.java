@@ -1,41 +1,58 @@
-/*
-- solution 1: duyệt qua mảng, so sánh phần tử ở vị trí k, với k bắt đầu từ index 1
-Nếu gặp đc phần tử khác -> chỉ việc set lại giá trị cần so sánh và tăng k --> O(n)
-- solution 2: có thể sử dụng set để check việc phần tử trùng, kết hợp với vòng lặp for để 
-vừa duyệt vừa set
-*/
+
+/**
+ * Removes duplicates from a sorted array and returns the number of unique elements.
+ *
+ * Approach:
+ * 1. Solution 1: Single loop with comparison.
+ *    - Start with the first element as a reference.
+ *    - Traverse the array and compare each element with the reference.
+ *    - If a different value is found, replace the element at position `k` and increment `k`.
+ *    - Time complexity: O(n).
+ *    - Space complexity: O(1).
+ *
+ * 2. Solution 2: Using a HashSet.
+ *    - Traverse the array and use a HashSet to track unique elements.
+ *    - For each unique element, move it to the front of the array.
+ *    - Time complexity: O(n) for iteration, but can be O(n^2) in worst case due to HashSet operations.
+ *    - Space complexity: O(n) due to the HashSet.
+ */
+import java.util.HashSet;
+import java.util.Set;
+
 class Solution {
-  public int removeDuplicates(int[] nums) {
-      // Solution 1:
-      /*
-      int k = 1;
-      int elementCompare = nums[0];
-      int n = nums.length;
 
-      for (int i = 1; i < n; i++) {
-          if (nums[i] != elementCompare) {
-              nums[k] = nums[i];
-              elementCompare = nums[i];
-              k++;
-          }
-      }
+    public int removeDuplicates(int[] nums) {
+        // Solution 1: Single loop with comparison (commented out)
+        /*
+         int k = 1; // Tracks the position of the next unique element
+         int elementCompare = nums[0]; // Reference value for comparison
+         int n = nums.length;
+ 
+         // Traverse the array starting from the second element
+         for (int i = 1; i < n; i++) {
+             if (nums[i] != elementCompare) { // If a new unique element is found
+                 nums[k] = nums[i]; // Place it in the position `k`
+                 elementCompare = nums[i]; // Update the reference value
+                 k++; // Increment the unique element count
+             }
+         }
+ 
+         return k; // Return the count of unique elements
+         */
 
-      return k;
-       */
-      
-      // Solution 2:
-      Set<Integer> numSet = new HashSet<>();
+        // Solution 2: Using a HashSet
+        Set<Integer> numSet = new HashSet<>(); // To track unique elements
+        int index = 0; // Tracks the position of the next unique element
 
-      var index = 0;
+        // Traverse the array
+        for (var x : nums) {
+            if (numSet.contains(x)) { // If the element is not in the HashSet
+                nums[index] = x; // Place it in the position `index`
+                numSet.add(x); // Add the element to the HashSet
+                index++; // Increment the unique element count
+            }
+        }
 
-      for (var x : nums) {
-          if (!numSet.contains(x)) {
-          nums[index] = x;
-          numSet.add(x);
-          index++;
-          }
-      }
-
-      return index;
-  }
+        return index; // Return the count of unique elements
+    }
 }
