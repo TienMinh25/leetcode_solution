@@ -39,7 +39,14 @@
  * Ta đặt f[i] là độ dài dãy con không giảm dài nhất kết thúc tại a[i]
  * 
  * Ta thấy: với mỗi a[i] bất kì, thì độ dài nhỏ nhất của dãy đều là 1
- * Nếu 
+ * Với mỗi j < i, mà a[j] <= a[i] ==> có thể thêm a[i] vào dãy hiện tại ==> f[i] = max(f[i], f[j] + 1)
+ * 
+ * Ở đây có thể tưởng tượng rằng đến thằng phần tử thứ i, nó không cần quan tâm trước đó có bao nhiêu phần
+ * tử đứng trước thoả mãn dãy hay không, mà chỉ cần quan tâm đến phần tử đang xét ở j trước nó là được
+ * 
+ * Bởi vì kết quả thoả mãn cho đến j đã đc tính toán và lưu trữ ở bài toán nhỏ hơn (đó chính là j)
+ * Có thể thấy nó cũng gần giống như Kadane algorithm =)) bởi vì Kadane algorithm cx là thuật toán
+ * dp
  * 
 */
 #include <iostream>
@@ -48,6 +55,30 @@ using namespace std;
 
 int main()
 {
+  int n; cin >> n;
+
+  int f[n], a[n];
+
+  for (int i = 0; i < n; i++)
+    cin >> a[i];
+
+  for (int i = 0; i < n; i++) 
+    f[i] = 1;
+
+  for (int i = 1; i < n; i++) {
+    for (int j = 0; j < i; j++) {
+      if (a[j] <= a[i]) {
+        f[i] = max(f[i], f[j] + 1);
+      }
+    }
+  }
+
+  int result = f[0];
+  for (int i = 1; i < n; i++) {
+    result = max(result, f[i]);
+  }
+
+  cout << "Result is: " << result;
 
   return 0;
 }
