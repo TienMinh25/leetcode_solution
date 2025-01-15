@@ -1,41 +1,51 @@
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
  * }
  */
 class Solution {
-    public boolean evaluateTree(TreeNode root) {
-        int rs = postorder(root);
+    public boolean isValidBST(TreeNode root) {
+        /*
+        List<Integer> a = new ArrayList<>();
 
-        return rs == 1;
-    }
+        inorder(root, a);
 
-    private int postorder(TreeNode root) {
-        if (root != null) {
-            if (root.left == null && root.right == null)
-                return root.val;
-
-            int left = postorder(root.left);
-            int right = postorder(root.right);
-
-            if (root.val == 2)
-                return left | right;
-            
-            if (root.val == 3)
-                return left & right;
+        for (int i = 0; i < a.size() - 1; i++) {
+            if (a.get(i) >= a.get(i + 1))
+                return false;
         }
 
-        // nothing to do right here, just by pass return for outside if (never occur) =))
-        return 0;
+        return true;
+        */
+        return validate(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean validate(TreeNode root, long min, long max) {
+        if (root == null) {
+            return true;
+        }
+
+        if (!(root.val > min && root.val < max))
+            return false;
+
+        return validate(root.left, min, root.val) && validate(root.right, root.val, max);
+    }
+
+    private void inorder(TreeNode root, List<Integer> a) {
+        if (root != null) {
+            inorder(root.left, a);
+            a.add(root.val);
+            inorder(root.right, a);
+        }
     }
 }
