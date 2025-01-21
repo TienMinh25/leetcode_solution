@@ -23,11 +23,16 @@ Welcome to the **LeetCode Solutions** repository! 🚀 This project is dedicated
 
 ```plaintext
 .
-├── README.md          # Project overview and guidelines
-├── array/             # Directory containing Java solution files with topic array
-└── notes/             # Additional notes and resources
-└
+├── README.md                 # Project overview and guidelines
+├── array/                    # Directory containing Java solution files with topic array
+├── backtracking/             # Directory containing Java solution files with topic backtracking
+├── dynamic-programming/      # Directory containing Java solution files with topic dynamic programming
+├── string/                   # Directory containing Java solution files with topic string
+├── tree/                     # Directory containing Java solution files with topic tree
+├── two-pointers/             # Directory containing Java solution files with topic two pointers
+└── dynamic-progamming-vnoi   # Addtional resource about learning more on website.
 ```
+For more resources on dynamic programming, check out the [VNOI Wiki](https://wiki.vnoi.info/).
 
 ## 🛠 Getting Started
 
